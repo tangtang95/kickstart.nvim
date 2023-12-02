@@ -198,12 +198,7 @@ require('lazy').setup({
       -- requirements installed.
       {
         'nvim-telescope/telescope-fzf-native.nvim',
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
-        build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
       },
     },
   },
@@ -439,7 +434,7 @@ vim.defer_fn(function()
       },
     },
   }
-end, 0)
+end, 1)
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
