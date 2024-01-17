@@ -176,7 +176,21 @@ require('lazy').setup({
       },
     },
   },
+  {
+    'nvimtools/none-ls.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    config = function ()
+      local null_ls = require("null-ls")
 
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.stylua
+        },
+      })
+    end
+  },
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
@@ -198,6 +212,21 @@ require('lazy').setup({
     },
     config = function()
       require("nvim-tree").setup {}
+    end,
+  },
+  {
+    "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("nvim-web-devicons").setup {
+        override_by_extension = {
+          ["toml"] = {
+            icon = "",
+            color = "#ffffff",
+            cterm_color = "231",
+            name = "Toml",
+          }
+        }
+      }
     end,
   },
 
@@ -531,7 +560,7 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   rust_analyzer = {},
-  -- tsserver = {},
+  tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
